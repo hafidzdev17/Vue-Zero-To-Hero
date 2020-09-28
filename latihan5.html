@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Properti</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ counter }}</h1>
+        <button onclick="hello.increment()"> + </button>
+        <button onclick="hello.decrement()"> - </button>
+
+        <h1>{{ fullName | upper}}</h1>
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        var hello = new Vue({
+            el: '#app',
+            data: {
+                counter: 0,
+                firstName: 'Hafid',
+                lastName: 'Masruri'
+            },
+            // properti methods
+            methods: {
+                increment() {
+                    this.counter++
+                },
+                decrement() {
+                    this.counter--
+
+                    if (this.counter < 0) {
+                        this.counter = 0
+                        alert('error')
+                    }
+                }
+            },
+            // properti computed
+            computed: {
+                fullName: function () {
+                    return this.firstName + ' ' + this.lastName
+                }
+            },
+            // properti filters
+            filters: {
+                upper(text) {
+                    return text.toUpperCase()
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
