@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penulisan Template</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- Constant -->
+        <h1 v-once>{{ hello }}</h1>
+        <!-- Raw Html -->
+        <h1 v-html="message"></h1>
+        <!-- Data Attribute -->
+        <h1 v-bind:class="class_h1">halo</h1>
+        <!-- JS Expression -->
+        <h1>{{ 'Pesan : ' + hello }}</h1>
+        <h1>{{ 10 + 10 }}</h1>
+    </div>
+
+    <style type="text/css">
+        .title {
+            color: green;
+        }
+    </style>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        var hello = new Vue({
+            el: '#app',
+            data: {
+                hello: 'Hello World',
+                message: "<span style='color:red'>Hello World!</a>",
+                class_h1: "title"
+            },
+            // template
+            // template: "<h2>{{ hello }}</h2>"
+
+            // method render
+            // render(createElement) {
+            //     return createElement('h1', this.message)
+            // }
+        });
+    </script>
+
+</body>
+
+</html>
