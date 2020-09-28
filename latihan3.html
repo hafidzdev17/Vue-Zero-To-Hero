@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Life Cycle</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ hello }}</h1>
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        var hello = new Vue({
+            el: '#app',
+            data: {
+                hello: 'Hello World'
+            },
+
+            // 1.create
+            beforeCreate() {
+                console.log('before create:' + 'message = ' + this.hello);
+            },
+            created() {
+                console.log('created: ' +
+                    'message = ' + this.hello)
+                console.log(this.$data);
+            },
+
+            // perbedaan menggunakan arrow function
+            // beforeCreate() {
+            //     console.log('simple function:' + this);
+            // },
+            // created: () => {
+            //     console.log('arrow function:' + this);
+            // }
+
+            // 2.Mount
+            beforeMount() {
+                console.log('before mount: ' + 'el = ' + this.$el.textContent);
+            },
+            mounted() {
+                console.log('mounted: ' + 'el = ' + this.$el.textContent);
+            },
+
+            // 3.update
+            beforeUpdate() {
+                console.log('before update: ' +
+                    'el = ' + this.$el.textContent)
+            },
+            updated() {
+                console.log('update: ' +
+                    'el = ' + this.$el.textContent)
+            },
+
+            // 4.destroy
+            beforeDestroy() {
+                console.log('before destroy')
+            },
+            destroyed() {
+                console.log('destroyed')
+            },
+
+        });
+        hello.hello = "selamat datang"
+        hello.$destroy()
+    </script>
+
+</body>
+
+</html>
