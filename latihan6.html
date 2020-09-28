@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Directive</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- directive if -->
+        <div v-if="nilai === 'A'">
+            Sempurna
+        </div>
+        <div v-else-if="nilai === 'B'">
+            Bagus
+        </div>
+        <div v-else-if="nilai === 'C'">
+            Cukup
+        </div>
+        <div v-else>
+            Kurang
+        </div>
+
+        <!-- directive v-on -->
+        <button v-on:click="incre()">Klik</button>
+        <p>Button di atas di klik {{ counter }} kali</p>
+        <button @click="info('halo')">klik</button>
+
+        <!-- directive v-bind -->
+        <div>
+            <img v-bind:src="imageSrc" width="200px">
+        </div>
+
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        var hello = new Vue({
+            el: '#app',
+            data: {
+                hello: 'Hello World',
+                nilai: 'A',
+                counter: 0,
+                imageSrc: 'images/levi.jpg'
+            },
+            methods: {
+                incre() {
+                    this.counter++
+                },
+                info(text) {
+                    alert(text)
+                }
+            }
+        });
+
+        setTimeout(() => {
+            hello.imageSrc = 'images/pain.png'
+        }, 5000)
+
+    </script>
+
+</body>
+
+</html>
