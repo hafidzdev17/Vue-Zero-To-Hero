@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handling Submit Form & Validation</title>
+</head>
+<style>
+    form {
+        border: 1px solid #ddd;
+        padding: 5px;
+        width: 225px;
+        background: #efefef;
+    }
+
+    label {
+        display: block;
+        margin-top: 5px;
+    }
+
+    input,
+    textarea,
+    select,
+    option {
+        min-width: 200px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <form ref="formBook" @submit.prevent="submitForm($event)" action="http://example.com/add-product" method="post">
+            <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
+            </p>
+            <label>Title:</label>
+            <input name="title" ref="title" type="text" v-model="title">
+            <label>Description:</label>
+            <textarea name="description" ref="description" v-model="description">
+        </textarea>
+            <label>Authors:</label>
+            <input name="authors" ref="authors" type="text" v-model="authors">
+            <label>Price:</label>
+            <input name="price" ref="price" type="number" v-model.number="price">
+            <label>Categories:</label>
+            <select name="categories" ref="categories" v-model="categories" multiple>
+                <option v-for="option in options" :value="option.value">
+                    {{ option.text }}
+                </option>
+            </select>
+            <label></label>
+            <input type="submit" value="Submit">
+        </form>s
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        var hello = new Vue({
+            el: '#app',
+            data: {
+                title: 'Google Glass with VueJS',
+                description: 'Control Google Glass with VueJS',
+                authors: 'Hafid Mukhlasin',
+                price: 75000,
+                categories: [],
+                options: [
+                    { text: 'Graphics Programming', value: '01' },
+                    { text: 'Mobile Application Development', value: '02' },
+                    { text: 'Virtual and Augmented Reality', value: '03' }
+                ],
+                errors: []
+            },
+            methods: {
+                submitForm(event) {
+                    this.errors = []
+                    if (this.title.length < 3) {
+                        this.errors.push('Title minimal 3 karakter!')
+                        this.$refs.title.select()
+                    }
+                    if (this.description.length > 500) {
+                        this.errors.push('Description maximal 500 karakter!')
+                        this.$refs.description.select()
+                    }
+                    if (this.authors.length < 3) {
+                        this.errors.push('Authors minimal 3 karakter!')
+                        this.$refs.authors.select()
+                    }
+                    if (this.price < 0) {
+                        this.errors.push('Price tidak boleh minus!')
+                        this.$refs.price.select()
+                    }
+                    if (this.categories.length === 0) {
+                        this.errors.push('Pilih minimal 1 category!')
+                        this.$refs.categories.focus()
+                    }
+                    if (this.errors.length === 0) {
+                        alert('Terima kasih telah mengisi data dengan benar!')
+                        // kirim data ke server
+                    }
+
+                    event.preventDefault()
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
