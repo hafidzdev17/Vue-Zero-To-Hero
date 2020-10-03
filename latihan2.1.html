@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue For</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="todo in todos">{{ todo.teks }}</li>
+        </ul>
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        var hello = new Vue({
+            el: '#app',
+            data: {
+                todos: [
+                    { teks: '1.Belajar Javascript' },
+                    { teks: '2.Belajar ES6' },
+                    { teks: '3.Belajar Vuejs' },
+                ]
+            }
+        });
+    </script>
+
+</body>
+
+</html>
