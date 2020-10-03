@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Way Data Binding</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script src="lib/vuex.js"></script>
+    <script>
+        var store = new Vuex.Store({
+            strict: true, // supaya warning muncul
+            state: {
+                name: 'Hafid'
+            },
+            mutations: {
+                setName: (state, name) => {
+                    state.name = name
+                }
+            },
+            getters: {
+                name: state => state.name
+            }
+        })
+        new Vue({
+            el: '#app',
+            // local state as computed
+            computed: {
+                name: {
+                    get() {
+                        return store.getters.name
+                    },
+                    set(value) {
+                        store.commit('setName', value)
+                    }
+                }
+            },
+            // actions
+            template:
+                `<div>
+        <input v-model='name'>
+        </div>`,
+        })
+    </script>
+
+</body>
+
+
+</html>
