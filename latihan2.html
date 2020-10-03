@@ -10,7 +10,10 @@
 <body>
     <div id="app">
         <h1>{{ name }}</h1>
-        <h1>{{ age }}</h1>
+        <span v-bind:title="pesan">
+    Arahkan mouse Anda kesini dan tunggu dalam beberapa detik
+    untuk melihat judul pesan yang dinamis
+  </span>
     </div>
 
     <script src="lib/vue.js"></script>
@@ -26,8 +29,8 @@
                     1: 'Deddy',
                     2: 'Hasyim',
                     3: 'Irfan'
-                }
-
+                },
+                pesan: 'Anda memuat halaman ini pada jam ' + new Date().toLocaleString()
             }
         });
     </script>
